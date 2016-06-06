@@ -1,7 +1,7 @@
 import React from 'react';
 import {mount} from 'react-mounter';
 
-import MainLayout from './components/main_layout.jsx';
+import MainLayout from './containers/main_layout';
 import Home from './components/home.jsx';
 
 import {version} from '/package.json';

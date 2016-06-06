@@ -23,7 +23,7 @@
   },
 
   "rules": {
-    "array-bracket-spacing": [2, "always"],
+    "array-bracket-spacing": [2, "never"],
     "arrow-spacing": 2,
     "block-scoped-var": 0,
     "brace-style": [2, "1tbs", {"allowSingleLine": true}],
