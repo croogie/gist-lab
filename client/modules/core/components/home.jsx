@@ -7,6 +7,6 @@ const Home = ({version}) => (
       Welcome to GistLab.
     </p>
   </div>
-); 
+);
 
 export default Home;
