@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  height: 100vh;
+}
+
+.menu {
+  flex: 0 0 auto;
+  background-color: $color-background--menu;
+  color: $color-font--inverted;
+}
+
+.list {
+  flex: 1 0 250px;
+  border-right: 1px solid $color-border;
+  background-color: darken($color-background, 3%);
+}
+
+.content {
+  flex: 2 0 50vw;
+  background-color: $color-background;
+  padding: $unit;
+}

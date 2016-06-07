@@ -23,6 +23,7 @@
     "react-simple-di": "^1.0.1"
   },
   "devDependencies": {
+    "autoprefixer": "^6.3.6",
     "babel-core": "6.x.x",
     "babel-plugin-react-require": "2.x.x",
     "babel-polyfill": "6.x.x",
@@ -37,7 +38,29 @@
     "eslint-plugin-react": "^4.3.0",
     "jsdom": "^8.0.4",
     "mocha": "2.x.x",
+    "postcss-safe-parser": "^1.0.7",
     "react-addons-test-utils": "^15.0.0",
     "sinon": "1.17.x"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {
+        "browsers": [
+          "last 2 versions"
+        ]
+      }
+    },
+    "parser": "postcss-safe-parser"
+  },
+  "cssModules": {
+    "extensions": [
+      "scss"
+    ],
+    "globalVariables": [
+      "client/configs/variables.scss"
+    ],
+    "outputJsFilePath": {
+      ".*node_modules/.*": "{dirname}/{basename}"
+    }
   }
 }
