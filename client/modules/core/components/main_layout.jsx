@@ -8,14 +8,12 @@ const noContent = () => null;
 const Layout = ({content = noContent, loggedIn, loggingIn, logout}) => (
   <div className={style.container}>
     <div className={style.menu}>
-      {
-        loggedIn ? <div>Hi there
-          <button onClick={logout}>Logout</button>
-        </div> :
-          loggingIn ? <div>Loading...</div> : <div>Login using <Accounts.ui.LoginForm /></div>
-      }
+       {
+         loggedIn ? <button className="ui button fluid" onClick={logout}><i className="user icon" />Logout</button> :
+           loggingIn ? <div>Loading...</div> : <Accounts.ui.LoginForm />
+       }
     </div>
-    <div className={style.list}>list</div>
+    {loggedIn ? <div className={style.list}>list</div> : null}
     <div className={style.content}>
       <EnsureLoggedIn>
         {content()}
