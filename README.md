@@ -58,5 +58,10 @@ To version management of app please use npm's package `mversion`.
 
 # Changelog
 
+### 0.2.0
+* Authentication with Github
+* Auth Button 
+* Displaying menu options
+
 ### 0.1.0
 * Initial project structure based on [Mantra specification (0.2.0)](https://kadirahq.github.io/mantra/) 
