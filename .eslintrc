@@ -23,7 +23,7 @@
   },
 
   "rules": {
-    "array-bracket-spacing": [2, "always"],
+    "array-bracket-spacing": [2, "never"],
     "arrow-spacing": 2,
     "block-scoped-var": 0,
     "brace-style": [2, "1tbs", {"allowSingleLine": true}],
@@ -56,7 +56,7 @@
     "linebreak-style": 2,
     "lines-around-comment": 0,
     "max-depth": 0,
-    "max-len": [2, 100, 4],
+    "max-len": [2, 120, 4],
     "max-nested-callbacks": 0,
     "max-params": 0,
     "max-statements": 0,

@@ -1,3 +1,7 @@
 {
-  "debug": true
+  "debug": true,
+  "github": {
+    "clientId": "e8299b2ca98606a95d72",
+    "secret"  : "c539ad4c68538ccb2a3ace6e8b00a75542fc1aa6"
+  }
 }

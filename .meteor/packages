@@ -24,3 +24,7 @@ insecure                # Allow all DB writes from clients (for prototyping)
 kadira:flow-router
 nathantreid:css-modules
 semantic:ui-css
+accounts-github
+service-configuration
+std:accounts-ui
+std:accounts-semantic
