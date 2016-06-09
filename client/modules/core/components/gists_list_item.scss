@@ -1,4 +1,8 @@
 .container {
+  user-select: none;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
   transition: background-color $unit--animation;
   background-color: $color-background--list;
   border-bottom: 1px solid $color-border;
@@ -17,6 +21,31 @@
 .selected {
   @extend .container;
 
-  font-weight: bold;
-  background-color: darken($color-background--list, 10%);
+  background-color: $color-background;
+
+  &:hover {
+    background-color: darken($color-background, 1%);
+  }
+}
+
+.avatar {
+  padding-right: .5*$unit;
+  flex: 0 0 auto;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+}
+
+.description {
+  flex: 1 1 auto;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+}
+
+.icons {
+  flex: 0 0 auto;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
 }

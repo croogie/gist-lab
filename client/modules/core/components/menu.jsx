@@ -51,7 +51,7 @@ export default class Menu extends Component {
       <div className={style.container}>
         <div className={style.topSection}>
           <h2 className="ui center aligned inverted icon header">
-            <i className="github square link icon"/>
+            <i className={classnames('github square link icon', {loading: this.props.inProgress})}/>
             GistLab
               {this.subHeader()}
           </h2>

@@ -19,7 +19,7 @@ export default class GistsList extends Component {
   menu() {
     return (
       <div className={style.menuContainer}>
-        <div>Michał</div>
+        <strong>Starred gists</strong>
         <div><i className="refresh loading link icon"/></div>
       </div>
     );

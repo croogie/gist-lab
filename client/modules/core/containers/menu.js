@@ -15,13 +15,16 @@ export const composer = ({context}, onData) => {
     let isLogged = () => username !== null;
 
     let defaultOptions = [
+      {action: 'github.requestMyGists', label: 'Request MY Gists', active: false, show: isLogged},
+      {action: 'github.requestStarredGists', label: 'Request STARRED Gists', active: false, show: isLogged},
       {action: 'navigateTo.myGists', label: 'My Gists', active: isActive('my'), show: isLogged},
       {action: 'navigateTo.starredGists', label: 'Favourites', active: isActive('favorites'), show: isLogged},
     ];
 
     onData(null, {
       username,
-      options: defaultOptions.filter(option => option.show() === true)
+      options: defaultOptions.filter(option => option.show() === true),
+      inProgress: Boolean(LocalState.get('FETCHING_MY_GISTS') || LocalState.get('FETCHING_STARRED_GISTS'))
     });
   }
 };
