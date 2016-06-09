@@ -2,18 +2,32 @@ import React from 'react';
 import {mount} from 'react-mounter';
 
 import MainLayout from './containers/main_layout';
+import GistsList from './containers/gists_list';
+
 import Home from './components/home.jsx';
 
 import {version} from '/package.json';
 
-export default function (injectDeps, {FlowRouter}) {
+export default function (injectDeps, {FlowRouter, LocalState}) {
   const MainLayoutCtx = injectDeps(MainLayout);
 
   FlowRouter.route('/', {
     name: 'home',
     action() {
       mount(MainLayoutCtx, {
-        content: () => (<Home version={version} />)
+        content: () => (<Home version={version}/>),
+        list: () => (<GistsList />)
+      });
+    }
+  });
+
+  FlowRouter.route('/gist/:id', {
+    name: 'gist',
+    action(params) {
+      LocalState.set('GIST', Number(params.id));
+      mount(MainLayoutCtx, {
+        content: () => (<Home version={params.id}/>),
+        list: () => (<GistsList />)
       });
     }
   });

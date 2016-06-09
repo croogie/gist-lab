@@ -1,3 +1,5 @@
+import {resetState} from '/client/modules/core/libs/common';
+
 export default {
   logout({Meteor, FlowRouter}) {
     Meteor.logout();
@@ -11,8 +13,7 @@ export default {
       },
     }, err => {
       if (!err) {
-        // after successful login - set list to display `My gists`
-        LocalState.set('LIST', 'my');
+        resetState({LocalState});
       }
     });
   }

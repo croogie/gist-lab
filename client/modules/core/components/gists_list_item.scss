@@ -1,0 +1,22 @@
+.container {
+  transition: background-color $unit--animation;
+  background-color: $color-background--list;
+  border-bottom: 1px solid $color-border;
+  padding: $unit .5*$unit;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background-color: darken($color-background--list, 5%);
+  }
+}
+
+.selected {
+  @extend .container;
+
+  font-weight: bold;
+  background-color: darken($color-background--list, 10%);
+}

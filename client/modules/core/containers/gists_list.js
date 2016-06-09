@@ -1,18 +1,21 @@
 import {useDeps, composeAll, composeWithTracker, compose} from 'mantra-core';
-import {authComposer} from 'meteor-auth';
-import MainLayout from '../components/main_layout.jsx';
+
+import GistsList from '../components/gists_list.jsx';
 
 export const composer = ({context}, onData) => {
-  // const {Meteor, Collections} = context();
-  onData(null, {});
+  const {Meteor, LocalState} = context();
+
+  let selectedId = LocalState.get('GIST');
+
+  onData(null, {selectedId});
 };
 
 export const depsMapper = (context, actions) => ({
-  context: () => context
+  context: () => context,
+  open: actions.navigateTo.gist
 });
 
 export default composeAll(
   composeWithTracker(composer),
-  composeWithTracker(authComposer),
   useDeps(depsMapper)
-)(MainLayout);
+)(GistsList);
