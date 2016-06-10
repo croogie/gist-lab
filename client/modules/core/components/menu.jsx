@@ -36,10 +36,10 @@ export default class Menu extends Component {
                props.onClick = action;
              }
 
-             // @todo countLabel: <span className="ui mini label">{option.count}</span>
+             let icon = option.icon ? <i className={classnames(option.icon, 'icon')} /> : null;
 
              return (
-               <a {...props}>{option.label}</a>
+               <a {...props}>{icon}{option.label}</a>
              );
            })}
       </div>
@@ -47,11 +47,13 @@ export default class Menu extends Component {
   }
 
   render() {
+    const {fetch = () => null, inProgress: loading} = this.props;
     return (
       <div className={style.container}>
         <div className={style.topSection}>
           <h2 className="ui center aligned inverted icon header">
-            <i className="github square link icon"/>
+            <i className={classnames('github square link icon', {loading})}
+               onClick={fetch}/>
             GistLab
               {this.subHeader()}
           </h2>
@@ -63,7 +65,8 @@ export default class Menu extends Component {
         <div className={style.bottomSection}>
           &nbsp;
         </div>
-      </div>)
+      </div>
+    );
   }
 };
 

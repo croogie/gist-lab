@@ -5,7 +5,7 @@
 }
 
 .menu {
-  flex: 0 0 auto;
+  flex: 0 0 210px;
   background-color: $color-background--menu;
   color: $color-font--inverted;
 }
@@ -13,7 +13,7 @@
 .list {
   flex: 1 0 250px;
   border-right: 1px solid $color-border;
-  background-color: darken($color-background, 3%);
+  background-color: $color-background--list;
 }
 
 .content {

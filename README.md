@@ -58,6 +58,11 @@ To version management of app please use npm's package `mversion`.
 
 # Changelog
 
+### 0.3.0
+* Fetching data from Github
+* Listing items, filtering them.
+* Navigation
+
 ### 0.2.0
 * Authentication with Github
 * Auth Button 
