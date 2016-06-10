@@ -57,5 +57,22 @@ export default {
         console.log('SUCCESS', result); // XXX
       }
     });
-  }
+  },
+
+  togglePublicFilter({LocalState}) {
+    LocalState.set('GISTS_FILTER_PUBLIC', !LocalState.get('GISTS_FILTER_PUBLIC'));
+  },
+
+  togglePrivateFilter({LocalState}) {
+    LocalState.set('GISTS_FILTER_PRIVATE', !LocalState.get('GISTS_FILTER_PRIVATE'));
+  },
+
+  toggleStarredFilter({LocalState}) {
+    LocalState.set('GISTS_FILTER_STARRED', !LocalState.get('GISTS_FILTER_STARRED'));
+  },
+
+  toggleOwnedFilter({LocalState, Meteor, _}) {
+    let username = _.property('services.github.username')(Meteor.user());
+    LocalState.set('GISTS_FILTER_OWNED', !LocalState.get('GISTS_FILTER_OWNED') ? username : false);
+  },
 };

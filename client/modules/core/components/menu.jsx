@@ -36,10 +36,10 @@ export default class Menu extends Component {
                props.onClick = action;
              }
 
-             // @todo countLabel: <span className="ui mini label">{option.count}</span>
+             let icon = option.icon ? <i className={classnames(option.icon, 'icon')} /> : null;
 
              return (
-               <a {...props}>{option.label}</a>
+               <a {...props}>{icon}{option.label}</a>
              );
            })}
       </div>

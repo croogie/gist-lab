@@ -69,6 +69,8 @@ export default function () {
       gistsToAdd.forEach(gist => {
         Gists.insert(gist);
       });
+
+      return gistsToAdd.length;
     }
   });
 }

@@ -45,14 +45,15 @@ export default class GistsListItem extends Component {
         className: classnames({
           world: pub,
           lock: !pub,
-          icon: true
+          'icon item': true,
+          [style.icon]: true
         }),
         title: `${pub ? 'Public' : 'Private'} gist`
       }
     ];
 
     if (starred) {
-      icons.push({className: 'star icon', title: 'Starred gist'});
+      icons.push({className: `star icon item ${style.icon}`, title: 'Starred gist'});
     }
 
     return (
