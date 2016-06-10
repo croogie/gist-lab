@@ -15,10 +15,9 @@ export const composer = ({context}, onData) => {
     let isLogged = () => username !== null;
 
     let defaultOptions = [
-      {action: 'github.requestMyGists', label: 'Request MY Gists', active: false, show: isLogged},
-      {action: 'github.requestStarredGists', label: 'Request STARRED Gists', active: false, show: isLogged},
+      {action: 'navigateTo.allGists', label: 'All My Gists', active: isActive('all'), show: isLogged},
       {action: 'navigateTo.myGists', label: 'My Gists', active: isActive('my'), show: isLogged},
-      {action: 'navigateTo.starredGists', label: 'Favourites', active: isActive('favorites'), show: isLogged},
+      {action: 'navigateTo.starredGists', label: 'Starred Gists', active: isActive('favorites'), show: isLogged},
     ];
 
     onData(null, {
@@ -31,7 +30,8 @@ export const composer = ({context}, onData) => {
 
 export const depsMapper = (context, actions) => ({
   context: () => context,
-  menuActions: actions
+  menuActions: actions,
+  fetch: actions.github.fetchGists
 });
 
 export default composeAll(

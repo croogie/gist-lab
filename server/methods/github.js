@@ -1,20 +1,18 @@
 import {Gists} from '/lib/collections';
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
+import _ from 'lodash';
 import {getInstance, getNextPage} from '../lib/github';
 
 export default function () {
   Meteor.methods({
-    'github.gists.request'(type = 'my') {
-      console.log(type); // XXX
+    'github.gists.get'(type = 'my') {
       const possibleTypes = ['my', 'starred'];
       check(type, String);
 
       if (possibleTypes.indexOf(type) === -1) {
         throw new Meteor.Error('github.gists.request.wrongType', 'Wrong type provided', `'${type}' is not supported`);
       }
-
-      console.log('here'); // XXX
 
       try {
         var github = getInstance();
@@ -29,8 +27,7 @@ export default function () {
       };
 
       function getGists(method = 'getAll', page = 1) {
-        console.log('requesting page ', page); // XXX
-        let gists = Meteor.wrapAsync(github.gists[method])({page, per_page: 50});
+        let gists = Meteor.wrapAsync(github.gists[method])({page, per_page: 100});
         let nextPage = getNextPage(gists.meta.link);
 
         let allGists = gists.map(gist => {
@@ -38,6 +35,9 @@ export default function () {
 
           // due to the fact that MongoDB won't accept keys with dot in it - we have to stringify `files` key
           gist.files = JSON.stringify(gist.files);
+
+          // distinguish which one has been starred
+          gist.starred = type === 'starred';
 
           return gist;
         });
@@ -51,49 +51,24 @@ export default function () {
 
       let gists = getGists(methodMapper[type]);
 
-      console.log(gists.length); // XXX
-
       return gists;
-
-      // github.gists.getAll(
-      //   {page, per_page: 200},
-      //   Meteor.bindEnvironment((err, requestedGists) => {
-      //     if (err) {
-      //       throw new Meteor.Error('github.gist.request.error', err.message,
-      //         'There were some problems with retrieving data from github');
-      //     }
-      //
-      //     if (requestedGists.length) {
-      //       let notImported = 0;
-      //
-      //       // if user requested first page - remove all stored gists.
-      //       if (page === 1) {
-      //         Gists.remove({userId});
-      //       }
-      //
-      //       requestedGists.forEach(gist => {
-      //         gist.userId = userId;
-      //
-      //         // have to escape because of possible dots in keys (!)
-      //         gist.files = JSON.stringify(gist.files);
-      //
-      //         Gists.upsert(
-      //           {id: gist.id, userId},
-      //           {$set: gist},
-      //           (upsertError) => {
-      //             if (upsertError) {
-      //               notImported++;
-      //               console.log(upsertError, gist.id);
-      //             }
-      //           }
-      //         );
-      //       });
-      //     }
-      //   })
-      // );
     },
-    'github.gists.starred'() {
 
+    'github.gists.fetch'() {
+      const userId = Meteor.userId();
+      const userGists = Meteor.call('github.gists.get');
+      const starredGists = Meteor.call('github.gists.get', 'starred');
+
+      const gistMapper = (gists, gist) => {
+        gists[gist.id] = gist;
+        return gists;
+      };
+      const gistsToAdd = _.values(starredGists.reduce(gistMapper, userGists.reduce(gistMapper, {})));
+
+      Gists.remove({userId});
+      gistsToAdd.forEach(gist => {
+        Gists.insert(gist);
+      });
     }
   });
 }

@@ -24,7 +24,7 @@ export default function (injectDeps, {FlowRouter, LocalState}) {
   FlowRouter.route('/gist/:id', {
     name: 'gist',
     action(params) {
-      LocalState.set('GIST', Number(params.id));
+      LocalState.set('GIST', String(params.id));
       mount(MainLayoutCtx, {
         content: () => (<Home version={params.id}/>),
         list: () => (<GistsList />)

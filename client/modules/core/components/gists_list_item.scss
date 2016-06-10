@@ -7,6 +7,7 @@
   background-color: $color-background--list;
   border-bottom: 1px solid $color-border;
   padding: $unit .5*$unit;
+  width: 300px;
 
   &:last-child {
     border-bottom: 0;
@@ -21,31 +22,40 @@
 .selected {
   @extend .container;
 
-  background-color: $color-background;
+  background-color: transparentize($color-primary, .8);
 
   &:hover {
-    background-color: darken($color-background, 1%);
+    background-color: transparentize($color-primary, .65);
   }
 }
 
 .avatar {
-  padding-right: .5*$unit;
-  flex: 0 0 auto;
+  flex: 0 0 40px;
   display: flex;
   flex-flow: column wrap;
   align-items: center;
 }
 
-.description {
-  flex: 1 1 auto;
+.content {
+  flex: 0 0 230px;
+  max-width: 230px;
   display: flex;
   flex-flow: column nowrap;
   align-items: stretch;
+  padding: 0 .5*$unit;
+}
+
+.description {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: inherit;
 }
 
 .icons {
-  flex: 0 0 auto;
+  flex: 0 0 20px;
   display: flex;
+
   flex-flow: column nowrap;
-  align-items: flex-start;
+  align-items: center;
 }

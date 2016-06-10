@@ -21,3 +21,11 @@
   flex: 1 1 100%;
   overflow-y: auto;
 }
+
+.centered {
+  flex: 1 1 100%;
+  display: flex;
+  overflow-y: hidden;
+  justify-content: center;
+  align-items: center;
+}
