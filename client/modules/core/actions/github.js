@@ -1,5 +1,9 @@
 export default {
   getMyGists({Meteor, LocalState}) {
+    if (!Meteor.user()) {
+      return;
+    }
+
     const fetching = 'FETCHING_MY_GISTS';
 
     if (LocalState.get(fetching) === true) {
@@ -18,6 +22,10 @@ export default {
   },
 
   getStarredGists({Meteor, LocalState}) {
+    if (!Meteor.user()) {
+      return;
+    }
+
     const fetching = 'FETCHING_STARRED_GISTS';
 
     if (LocalState.get(fetching) === true) {
@@ -36,6 +44,10 @@ export default {
   },
 
   fetchGists({Meteor, LocalState}) {
+    if (!Meteor.user()) {
+      return;
+    }
+
     const fStarred = 'FETCHING_STARRED_GISTS';
     const fMy = 'FETCHING_MY_GISTS';
 

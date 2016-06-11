@@ -5,8 +5,9 @@ import {resetState} from './libs/common';
 export default {
   routes,
   actions,
-  load({LocalState}) {
-    resetState({LocalState}); // set default values of LocalState
+  load(context) {
+    resetState(context);                  // set default values of LocalState
+    actions.github.fetchGists(context);   // fetch gists from API
 
     console.log('Core module has been initialized.');
   }

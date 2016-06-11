@@ -58,6 +58,9 @@ To version management of app please use npm's package `mversion`.
 
 # Changelog
 
+### 0.3.1
+* Fetching data on login and page load.
+
 ### 0.3.0
 * Fetching data from Github
 * Listing items, filtering them.

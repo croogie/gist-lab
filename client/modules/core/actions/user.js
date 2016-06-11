@@ -1,4 +1,5 @@
 import {resetState} from '/client/modules/core/libs/common';
+import github from './github';
 
 export default {
   logout({Meteor, FlowRouter}) {
@@ -14,6 +15,7 @@ export default {
     }, err => {
       if (!err) {
         resetState({LocalState});
+        github.fetchGists({Meteor, LocalState});
       }
     });
   }
