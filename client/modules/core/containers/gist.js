@@ -6,21 +6,25 @@ import _ from 'lodash';
 export const composer = ({context, id}, onData) => {
   const {Meteor, Collections, LocalState} = context();
 
-  if (Meteor.subscribe('gist', id).ready() && Meteor.subscribe('userData').ready()) {
+  let data = {};
+
+  if (Meteor.subscribe('gist', id).ready() && Meteor.subscribe('userData').ready() && Meteor.subscribe('labels').ready()) {
     const username = _.property('services.github.username')(Meteor.user());
     const gist = Collections.Gists.findOne({id});
+    const userId = Meteor.userId();
 
     gist.files = JSON.parse(gist.files);
 
-    return onData(null, {
+    data = {
       gist,
+      labels: Collections.Labels.find({userId}).fetch(),
       editable: username === gist.owner.login,
       editing: Boolean(LocalState.get('EDIT_MODE')),
       starring: Boolean(LocalState.get('STARRING'))
-    });
+    };
   }
 
-  onData();
+  onData(null, data.gist && data.labels ? data : null);
 };
 
 export const depsMapper = (context, actions) => ({
@@ -29,7 +33,8 @@ export const depsMapper = (context, actions) => ({
   onEditClick: actions.github.editGist,
   onSaveClick: actions.github.saveGist,
   onDeleteClick: actions.github.deleteGist,
-  onPublicityClick: actions.github.togglePublic
+  onPublicityClick: actions.github.togglePublic,
+  onChangeLabels: actions.labels.updateGistLabels
 });
 
 export default composeAll(

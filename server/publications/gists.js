@@ -12,8 +12,6 @@ export default function () {
     check(id, String);
     let userId = this.userId;
 
-    // Meteor._sleepForMs(500);
-
     return Gists.find({userId, id});
   });
 }

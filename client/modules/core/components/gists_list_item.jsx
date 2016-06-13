@@ -33,8 +33,28 @@ export default class GistsListItem extends Component {
             </div>
           </h5>
           <div className={style.description}>{description}</div>
+          {this.tags()}
         </div>
            {this.icons(pub, starred)}
+      </div>
+    );
+  }
+
+  tags() {
+    const {labels: labelDefs} = this.props;
+    const {labels} = this.props.gist;
+
+    if (!labels || !labels.length) {
+      return null;
+    }
+
+    return (
+      <div>
+        {labels.map(label => (
+          <i key={label}
+             title={labelDefs[label].title}
+             className={classnames('icon tag', labelDefs[label].color)} />
+        ))}
       </div>
     );
   }

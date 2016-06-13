@@ -3,6 +3,7 @@ import style from './menu.scss';
 import AuthButton from '../containers/auth_button';
 import classnames from 'classnames';
 import _ from 'lodash';
+import Labels from '../containers/labels';
 
 export default class Menu extends Component {
   subHeader() {
@@ -36,7 +37,7 @@ export default class Menu extends Component {
                props.onClick = action;
              }
 
-             let icon = option.icon ? <i className={classnames(option.icon, 'icon')} /> : null;
+             let icon = option.icon ? <i className={classnames(option.icon, 'icon')}/> : null;
 
              return (
                <a {...props}>{icon}{option.label}</a>
@@ -63,7 +64,7 @@ export default class Menu extends Component {
              {this.menuOptions()}
         </div>
         <div className={style.bottomSection}>
-          &nbsp;
+          <Labels />
         </div>
       </div>
     );

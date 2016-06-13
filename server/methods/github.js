@@ -64,9 +64,12 @@ export default function () {
       };
       const gistsToAdd = _.values(starredGists.reduce(gistMapper, userGists.reduce(gistMapper, {})));
 
-      Gists.remove({userId});
+      const gistIds = gistsToAdd.map(gist => gist.id);
+
+      Gists.remove({userId, id: {$nin: gistIds}}); // remove all documents which were not found on github
+
       gistsToAdd.forEach(gist => {
-        Gists.insert(gist);
+        Gists.upsert({userId, id: gist.id}, {$set: gist});
       });
 
       return gistsToAdd.length;
