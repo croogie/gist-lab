@@ -67,7 +67,7 @@ export default class GistsList extends Component {
 
     return (
       <div className="ui active inverted dimmer">
-        <div className="ui indeterminate text loader">Editing GIST mode</div>
+        <div className="ui indeterminate text loader">In edit mode.</div>
       </div>
     );
   }

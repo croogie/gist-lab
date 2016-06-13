@@ -20,7 +20,7 @@ export default class Gist extends Component {
   }
 
   header() {
-    const {created_at, updated_at, description, owner, public: pub, starred, url, files} = this.props.gist;
+    const {created_at, updated_at, description, owner, public: pub, files} = this.props.gist;
     const file = Object.keys(files)[0];
     const created = moment(created_at);
     const updated = moment(updated_at);
