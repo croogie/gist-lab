@@ -42,8 +42,25 @@ export default {
     LocalState.set('GISTS_FILTER_OWNED', !LocalState.get('GISTS_FILTER_OWNED') ? username : false);
   },
 
-  toggleStar({LocalState, Meteor, Msg}, id) {
-    Msg.alert('Not implemented', 'warning');
+  toggleStar({LocalState, Meteor, Msg}, gist) {
+    if (Meteor.user() && typeof gist.starred !== 'undefined') {
+      LocalState.set('STARRING', true);
+      Meteor.call(
+        `github.gists.${gist.starred ? 'unstar' : 'star'}`,
+        gist.id,
+        (err) => {
+          LocalState.set('STARRING', false);
+          if (!err) {
+            Msg.alert({
+              title: `Gist has been ${gist.starred ? 'unstarred' : 'starred'} successfully`,
+              type: 'success',
+              icon: `star icon fitted ${gist.starred ? 'empty' : ''}`
+            });
+          } else {
+            Msg.alert({title: 'There were some problems with starring gist.', type: 'error'});
+          }
+        });
+    }
   },
 
   editGist({LocalState, Msg}) {

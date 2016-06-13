@@ -15,7 +15,8 @@ export const composer = ({context, id}, onData) => {
     return onData(null, {
       gist,
       editable: username === gist.owner.login,
-      editing: Boolean(LocalState.get('EDIT_MODE'))
+      editing: Boolean(LocalState.get('EDIT_MODE')),
+      starring: Boolean(LocalState.get('STARRING'))
     });
   }
 

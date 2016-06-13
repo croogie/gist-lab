@@ -46,7 +46,7 @@ export default class Gist extends Component {
 
   footer() {
     const {
-      editable, editing, gist,
+      editable, editing, gist, starring,
       onStarClick, onPublicityClick, onSaveClick, onEditClick, onDeleteClick
     } = this.props;
     const {starred, id, public: pub} = gist;
@@ -65,9 +65,13 @@ export default class Gist extends Component {
           </button>
         )}
 
-        <button className="ui button" onClick={() => onStarClick(id)}>
-          <i className={classnames('star icon', {empty: !starred, yellow: starred})}/> {starred ? 'Unstar' : 'Star it!'}
-        </button>
+        <div className={classnames('ui animated fade button', {loading: starring})}
+             onClick={() => starring ? null : onStarClick(gist)}>
+          <div className="visible content">
+            <i className={classnames('star icon', {empty: !starred, yellow: starred})}/> {starred ? 'Starred' : 'Not starred'}
+          </div>
+          <div className="hidden content">{starred ? 'Unstar' : 'Make it shine!'}</div>
+        </div>
 
         <button className={classnames('ui button', {disabled})} onClick={() => onPublicityClick(id)}>
           <i className={classnames('icon', {world: !pub, lock: pub})}/>

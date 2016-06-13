@@ -53,7 +53,6 @@ export default function () {
 
       return gists;
     },
-
     'github.gists.fetch'() {
       const userId = Meteor.userId();
       const userGists = Meteor.call('github.gists.get');
@@ -71,6 +70,29 @@ export default function () {
       });
 
       return gistsToAdd.length;
+    },
+    'github.gists.star'(id) {
+      check(id, String);
+
+      const github = getInstance();
+      const userId = Meteor.userId();
+
+      let result = Meteor.wrapAsync(github.gists.star)({id});
+
+      Gists.update({userId, id}, {$set: {starred: true}});
+
+      return result;
+    },
+    'github.gists.unstar'(id) {
+      check(id, String);
+
+      const github = getInstance();
+      const userId = Meteor.userId();
+
+      let result = Meteor.wrapAsync(github.gists.unstar)({id});
+      Gists.update({userId, id}, {$set: {starred: false}});
+
+      return result;
     }
   });
 }

@@ -1,11 +1,10 @@
 import React from 'react';
+import style from './home.scss';
 
 const Home = ({version}) => (
-  <div>
-    <h1>GIST Lab (v{version})</h1>
-    <p>
-      Welcome to GistLab.
-    </p>
+  <div className={style.container}>
+    <img className="ui centered medium image" src="/img/octocat.png" alt=""/>
+    <h1 className="ui header centered">GIST Lab (v{version})</h1>
   </div>
 );
 
