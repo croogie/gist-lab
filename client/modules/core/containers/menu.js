@@ -50,7 +50,7 @@ export const composer = ({context}, onData) => {
       onData(null, {
         username,
         options: defaultOptions.filter(option => option.show() === true),
-        inProgress: Boolean(LocalState.get('FETCHING_MY_GISTS') || LocalState.get('FETCHING_STARRED_GISTS'))
+        inProgress: Boolean(LocalState.get('FETCHING_GISTS'))
       });
 
     });

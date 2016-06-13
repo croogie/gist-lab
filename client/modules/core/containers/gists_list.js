@@ -7,7 +7,7 @@ export const composer = ({context}, onData) => {
 
   let props = {
     loading: true,
-    fetching: Boolean(LocalState.get('FETCHING_MY_GISTS') || LocalState.get('FETCHING_STARRED_GISTS')),
+    fetching: Boolean(LocalState.get('FETCHING_GISTS')),
     showStarred: Boolean(LocalState.get('GISTS_FILTER_STARRED')),
     showPrivate: Boolean(LocalState.get('GISTS_FILTER_PRIVATE')),
     showPublic: Boolean(LocalState.get('GISTS_FILTER_PUBLIC')),
