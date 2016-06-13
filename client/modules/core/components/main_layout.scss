@@ -1,23 +1,25 @@
 .container {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row nowrap;
   height: 100vh;
 }
 
 .menu {
-  flex: 0 0 210px;
+  flex: none;
   background-color: $color-background--menu;
   color: $color-font--inverted;
 }
 
 .list {
-  flex: 1 0 250px;
+  flex: none;
   border-right: 1px solid $color-border;
   background-color: $color-background--list;
 }
 
 .content {
-  flex: 2 0 50vw;
+  flex: 1 50vw;
+  min-width: 50vw;
   background-color: $color-background;
   padding: $unit;
+  height: 100vh;
 }

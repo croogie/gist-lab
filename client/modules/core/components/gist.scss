@@ -1,0 +1,23 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  p:last-child {
+    border-bottom: 1px solid $color-border;
+    padding-bottom: .5*$unit;
+  }
+}
+
+.files {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.footer {
+  flex: 0 0 auto;
+  padding-top: $unit;
+  border-top: 1px solid $color-border;
+}

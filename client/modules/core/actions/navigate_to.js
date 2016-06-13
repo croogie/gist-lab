@@ -26,6 +26,8 @@ export default {
     }
 
     FlowRouter.go('gist', {id});
+
+    LocalState.set('EDIT_MODE', false);
     LocalState.set('GIST', id);
   }
 };

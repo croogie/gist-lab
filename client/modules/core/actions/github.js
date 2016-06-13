@@ -87,4 +87,30 @@ export default {
     let username = _.property('services.github.username')(Meteor.user());
     LocalState.set('GISTS_FILTER_OWNED', !LocalState.get('GISTS_FILTER_OWNED') ? username : false);
   },
+
+  toggleStar({LocalState, Meteor}, id) {
+    console.log(id); // XXX
+    throw new Error('Not implemented');
+  },
+
+  editGist({LocalState}) {
+    console.log('EDIT MODE ON'); // XXX
+    LocalState.set('EDIT_MODE', true);
+  },
+
+  saveGist({LocalState}) {
+    console.log('EDIT MODE OFF'); // XXX
+    LocalState.set('EDIT_MODE', false);
+  },
+
+  togglePublic({LocalState, Meteor}, gist) {
+    console.log(gist); // XXX
+    throw new Error('Not implemented');
+  },
+
+  deleteGist({LocalState, Meteor}, gist) {
+    console.log(gist); // XXX
+    throw new Error('Not implemented');
+  }
+
 };

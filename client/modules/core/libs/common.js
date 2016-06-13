@@ -7,6 +7,7 @@ export function resetState({LocalState}) {
   setFilters({LocalState});
 
   LocalState.set('GIST', null);                     // no gist is selected
+  LocalState.set('EDIT_MODE', false);
 }
 
 export function setFilters({LocalState}, owned = false, starred = false, isPrivate = false, isPublic = false) {
