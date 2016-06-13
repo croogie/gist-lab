@@ -9,6 +9,7 @@ export function resetState({LocalState}) {
   LocalState.set('GIST', null);                     // no gist is selected
   LocalState.set('EDIT_MODE', false);
   LocalState.set('STARRING', false);                // Starring is in progress
+  LocalState.set('LABEL_EDIT_MODE', false);         // Editing labels mode
 }
 
 export function setFilters({LocalState}, owned = false, starred = false, isPrivate = false, isPublic = false) {
