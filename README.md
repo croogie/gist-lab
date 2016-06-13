@@ -58,6 +58,10 @@ To version management of app please use npm's package `mversion`.
 
 # Changelog
 
+### 0.5.0
+* Labels functionality (managing and assigning to gists)
+* Filtering list by labels
+
 ### 0.4.0
 * Ability to review all files of shown GIST. 
 * Some UX/UI fixes. 
