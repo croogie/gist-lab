@@ -23,8 +23,11 @@
 }
 
 .centered {
-  flex: 1 1 100%;
+  flex: 0 100%;
+  width: 300px;
+  padding: $unit;
   display: flex;
+  flex-direction: column;
   overflow-y: hidden;
   justify-content: center;
   align-items: center;

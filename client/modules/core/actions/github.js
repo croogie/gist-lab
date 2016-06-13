@@ -18,7 +18,6 @@ export default {
 
       if (err) {
         Msg.alert('There were some problems with fetching your gists.', 'error');
-        console.error(err); // XXX
       } else {
         Msg.alert(`Your gists database has been refreshed. Contains ${result} Gists`, 'success');
       }

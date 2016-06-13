@@ -15,6 +15,7 @@ export default function (injectDeps, {FlowRouter, LocalState}) {
   FlowRouter.route('/', {
     name: 'home',
     action() {
+      LocalState.set('GIST', null);
       mount(MainLayoutCtx, {
         content: () => (<Home version={version} />),
         list: () => (<GistsList />)

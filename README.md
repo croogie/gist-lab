@@ -50,13 +50,21 @@ To check if code written by you applies adopted coding standards please use ESLi
 
 ## Testing
 
-To run tests simply execute `npm test`
+WOOPS! Something is not working as expected. In progress...
+~~To run tests simply execute `npm test`~~
 
 ## Versioning
 
 To version management of app please use npm's package `mversion`.
 
 # Changelog
+
+### 0.5.1
+* Unselecting active element while reaching home.
+* Loading state of list item.
+* Hide labels menu when user is not logged in.
+* Better `no items` layout.
+* Few other minor fixes.
 
 ### 0.5.0
 * Labels functionality (managing and assigning to gists)

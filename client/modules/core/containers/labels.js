@@ -21,8 +21,6 @@ export const composer = ({context}, onData) => {
   if (Meteor.subscribe('labels').ready()) {
     publishData();
   }
-
-
 };
 
 export const depsMapper = (context, actions) => ({

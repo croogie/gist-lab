@@ -48,13 +48,13 @@ export default class Menu extends Component {
   }
 
   render() {
-    const {fetch = () => null, inProgress: loading} = this.props;
+    const {fetch = () => null, username = null, inProgress: loading} = this.props;
     return (
       <div className={style.container}>
         <div className={style.topSection}>
           <h2 className="ui center aligned inverted icon header">
             <i className={classnames('github square link icon', {loading})}
-               onClick={fetch}/>
+               onClick={() => username ? fetch() : null}/>
             GistLab
               {this.subHeader()}
           </h2>
@@ -64,11 +64,11 @@ export default class Menu extends Component {
              {this.menuOptions()}
         </div>
         <div className={style.bottomSection}>
-          <Labels />
+          {username ? <Labels /> : null}
         </div>
       </div>
     );
   }
-};
+}
 
 export default Menu;

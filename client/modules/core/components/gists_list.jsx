@@ -18,8 +18,8 @@ export default class GistsList extends Component {
 
     return (
       <div className={style.listContainer}>
-           {items.map((item, key) => (
-             <Item key={key}
+           {items.map((item) => (
+             <Item key={item.id}
                    gist={item}
                    onClick={() => open(item.id)}
                    selected={item.id === selectedId}/>
@@ -33,15 +33,21 @@ export default class GistsList extends Component {
 
     return (
       <div className={style.centered}>
-        <h3 className="ui header">
+        <h3 className="ui header relaxed">
           <i className="github alternate icon"/>
           <div className="content">
             There are no items to show
-            <div className="sub header">
-              How about <i className={classnames('refresh fitted link icon', {loading: fetching})}
-                           onClick={refresh} />with Github?</div>
+            <div className="sub header">Be sure that you:</div>
           </div>
         </h3>
+        <ul>
+          <li>Synced data with github,</li>
+          <li>Didn't apply too many filters on results (eg. star, ownership or label filters)</li>
+        </ul>
+        <p>Otherwise you really don't have any gists.</p>
+        <p><button className="ui button primary icon labeled">
+          Add new gist<i className="plus circle icon"/>
+        </button></p>
       </div>
     );
   }

@@ -5,12 +5,35 @@ import _ from 'lodash';
 import classnames from 'classnames';
 
 export default class GistsListItem extends Component {
+  getLoadingData() {
+    return {
+      gist: {
+        owner: {
+          avatar_url: '/img/octocat.png',
+          login: 'Unknown'
+        },
+        description: 'Loading data. Please wait...',
+        public: true,
+        created_at: new Date(),
+        files: {
+          'Loading...': {
+            language: 'unknown'
+          }
+        },
+        labels: [],
+        starred: false
+      },
+      labels: [],
+      onClick: () => null
+    };
+  }
+
   render() {
     const {
       selected,
       gist: {owner: {avatar_url, login}, description, public: pub, created_at, files, starred},
       onClick = () => null
-    } = this.props;
+    } = this.props.loading ? this.getLoadingData() : this.props;
     const createdAt = moment(created_at);
     const fileCount = Object.keys(files).length;
 
@@ -41,6 +64,10 @@ export default class GistsListItem extends Component {
   }
 
   tags() {
+    if (this.props.loading) {
+      return null;
+    }
+
     const {labels: labelDefs} = this.props;
     const {labels} = this.props.gist;
 
@@ -73,7 +100,7 @@ export default class GistsListItem extends Component {
     ];
 
     if (starred) {
-      icons.push({className: `star icon item ${style.icon}`, title: 'Starred gist'});
+      icons.push({className: `star icon yellow item ${style.icon}`, title: 'Starred gist'});
     }
 
     return (

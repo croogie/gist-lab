@@ -11,8 +11,6 @@ export default {
     } else {
       LocalState.set('GISTS_FILTER_LABELS', [label].concat(labelFilters));
     }
-
-    console.log(LocalState.get('GISTS_FILTER_LABELS')); // XXX
   },
 
   addLabel({Meteor, Msg}) {
