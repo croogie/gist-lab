@@ -1,0 +1,16 @@
+.source {
+  display: block;
+  font-size: 13px;
+  line-height: 20px;
+  word-break: break-all;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  border-radius: 4px;
+}
+
+.header {
+  margin-top: $unit;
+  background-color: $color-background--menu;
+  color: $color-font--inverted;
+  padding: .5*$unit $unit;
+}

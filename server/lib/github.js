@@ -4,13 +4,13 @@ import GitHub from 'github';
 let github;
 
 export function getInstance() {
+  const user = Meteor.user();
+
+  if (!user) {
+    throw Error('No user found.');
+  }
+
   if (!github) {
-    const user = Meteor.user();
-
-    if (!user) {
-      throw Error('No user found.');
-    }
-
     github = new GitHub({
       debug: Boolean(Meteor.settings.debug)
     });

@@ -1,72 +1,26 @@
 export default {
-  getMyGists({Meteor, LocalState}) {
+  fetchGists({Meteor, LocalState, Msg}) {
     if (!Meteor.user()) {
       return;
     }
 
-    const fetching = 'FETCHING_MY_GISTS';
+    const fetching = 'FETCHING_GISTS';
 
-    if (LocalState.get(fetching) === true) {
-      console.log('Already fetching user\'s gists. Please wait...'); // XXX
+    if (LocalState.get(fetching)) {
+      Msg.alert('We\'re already working on this. Please wait!', 'warning');
       return;
     }
 
     LocalState.set(fetching, true);
-
-    Meteor.call('github.gists.get', 'my', (err, result) => {
-      LocalState.set(fetching, false);
-      if (!err) {
-        console.log('SUCCESS', result); // XXX
-      }
-    });
-  },
-
-  getStarredGists({Meteor, LocalState}) {
-    if (!Meteor.user()) {
-      return;
-    }
-
-    const fetching = 'FETCHING_STARRED_GISTS';
-
-    if (LocalState.get(fetching) === true) {
-      console.log('Already fetching starred gists. Please wait...'); // XXX
-      return;
-    }
-
-    LocalState.set(fetching, true);
-
-    Meteor.call('github.gists.get', 'starred', (err, result) => {
-      LocalState.set(fetching, false);
-      if (!err) {
-        console.log('SUCCESS', result); // XXX
-      }
-    });
-  },
-
-  fetchGists({Meteor, LocalState}) {
-    if (!Meteor.user()) {
-      return;
-    }
-
-    const fStarred = 'FETCHING_STARRED_GISTS';
-    const fMy = 'FETCHING_MY_GISTS';
-
-    if (LocalState.get(fStarred) || LocalState.get(fMy)) {
-      console.log('Already requesting GISTS. Please wait...'); // XXX
-      return;
-    }
-
-    LocalState.set(fStarred, true);
-    LocalState.set(fMy, true);
 
     Meteor.call('github.gists.fetch', (err, result) => {
-      LocalState.set(fStarred, false);
-      LocalState.set(fMy, false);
+      LocalState.set(fetching, false);
 
       if (err) {
+        Msg.alert('There were some problems with fetching your gists.', 'error');
         console.error(err); // XXX
       } else {
-        console.log('SUCCESS', result); // XXX
+        Msg.alert(`Your gists database has been refreshed. Contains ${result} Gists`, 'success');
       }
     });
   },
@@ -87,4 +41,44 @@ export default {
     let username = _.property('services.github.username')(Meteor.user());
     LocalState.set('GISTS_FILTER_OWNED', !LocalState.get('GISTS_FILTER_OWNED') ? username : false);
   },
+
+  toggleStar({LocalState, Meteor, Msg}, gist) {
+    if (Meteor.user() && typeof gist.starred !== 'undefined') {
+      LocalState.set('STARRING', true);
+      Meteor.call(
+        `github.gists.${gist.starred ? 'unstar' : 'star'}`,
+        gist.id,
+        (err) => {
+          LocalState.set('STARRING', false);
+          if (!err) {
+            Msg.alert({
+              title: `Gist has been ${gist.starred ? 'unstarred' : 'starred'} successfully`,
+              type: 'success',
+              icon: `star icon fitted ${gist.starred ? 'empty' : ''}`
+            });
+          } else {
+            Msg.alert({title: 'There were some problems with starring gist.', type: 'error'});
+          }
+        });
+    }
+  },
+
+  editGist({LocalState, Msg}) {
+    Msg.alert('You can edit your GIST', 'success', 'growl-top-right');
+    LocalState.set('EDIT_MODE', true);
+  },
+
+  saveGist({LocalState, Msg}) {
+    Msg.alert('Your changes has been saved', 'success', 'growl-top-right');
+    LocalState.set('EDIT_MODE', false);
+  },
+
+  togglePublic({LocalState, Meteor, Msg}, gist) {
+    Msg.alert('Not implemented', 'warning');
+  },
+
+  deleteGist({LocalState, Meteor, Msg}, gist) {
+    Msg.alert('Not implemented', 'warning');
+  }
+
 };

@@ -60,6 +60,18 @@ export default class GistsList extends Component {
     );
   }
 
+  editing() {
+    if (!this.props.editing) {
+      return null;
+    }
+
+    return (
+      <div className="ui active inverted dimmer">
+        <div className="ui indeterminate text loader">In edit mode.</div>
+      </div>
+    );
+  }
+
   menu() {
     const {
       showStarred = false,
@@ -104,9 +116,10 @@ export default class GistsList extends Component {
 
   render() {
     return (
-      <div className={style.container}>
-           {this.menu()}
-           {this.items()}
+      <div className={classnames(style.container)}>
+        {this.editing()}
+        {this.menu()}
+        {this.items()}
       </div>
     );
   }

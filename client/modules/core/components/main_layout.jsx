@@ -13,9 +13,7 @@ const Layout = ({content = noContent, list = noContent(), loggedIn}) => (
     </div>
        {loggedIn ? <div className={style.list}>{list()}</div> : null}
     <div className={style.content}>
-      <EnsureLoggedIn>
-        {content()}
-      </EnsureLoggedIn>
+      {content()}
     </div>
   </div>
 );

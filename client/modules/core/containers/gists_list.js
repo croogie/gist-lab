@@ -7,30 +7,35 @@ export const composer = ({context}, onData) => {
 
   let props = {
     loading: true,
-    fetching: Boolean(LocalState.get('FETCHING_MY_GISTS') || LocalState.get('FETCHING_STARRED_GISTS')),
+    fetching: Boolean(LocalState.get('FETCHING_GISTS')),
     showStarred: Boolean(LocalState.get('GISTS_FILTER_STARRED')),
     showPrivate: Boolean(LocalState.get('GISTS_FILTER_PRIVATE')),
     showPublic: Boolean(LocalState.get('GISTS_FILTER_PUBLIC')),
     showOwned: Boolean(LocalState.get('GISTS_FILTER_OWNED')),
+    editing: Boolean(LocalState.get('EDIT_MODE')),
     selectedId: LocalState.get('GIST')
   };
 
-  if (Meteor.subscribe('gists').ready()) {
-    Tracker.autorun(() => {
-      props.items = Collections.Gists.findFiltered(
-        {userId: Meteor.userId()},
-        {
-          public: props.showPublic,
-          private: props.showPrivate,
-          starred: props.showStarred,
-          owned: LocalState.get('GISTS_FILTER_OWNED')
-        }
-      ).fetch().map(gist => {
-        gist.files = JSON.parse(gist.files);
-        return gist;
-      });
-      props.loading = false;
+  const getGists = () => {
+    props.items = Collections.Gists.findFiltered(
+      {userId: Meteor.userId()},
+      {
+        public: props.showPublic,
+        private: props.showPrivate,
+        starred: props.showStarred,
+        owned: LocalState.get('GISTS_FILTER_OWNED')
+      }
+    ).fetch().map(gist => {
+      gist.files = JSON.parse(gist.files);
+      return gist;
     });
+    props.loading = false;
+  };
+
+  Tracker.autorun(getGists);
+
+  if (Meteor.subscribe('gists').ready()) {
+    getGists();
   }
 
   onData(null, props);
