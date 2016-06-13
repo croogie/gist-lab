@@ -17,4 +17,5 @@ export function setFilters({LocalState}, owned = false, starred = false, isPriva
   LocalState.set('GISTS_FILTER_PUBLIC', isPublic);   // filtering gists list
   LocalState.set('GISTS_FILTER_PRIVATE', isPrivate); // filtering gists list
   LocalState.set('GISTS_FILTER_STARRED', starred);   // filtering gists list
+  LocalState.set('GISTS_FILTER_LABELS', []);
 }

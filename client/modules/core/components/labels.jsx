@@ -27,8 +27,8 @@ export default class Labels extends Component {
       <div>
         {labels.map(label => (
           <a key={label.title}
-               onClick={() => !editMode ? onLabelClick(label) : onLabelDelete(label)}
-               className={classnames('item', {active: active.indexOf(label.title) !== -1})}>
+               onClick={() => !editMode ? onLabelClick(label._id) : onLabelDelete(label)}
+               className={classnames('item', {active: active.indexOf(label._id) !== -1})}>
             <i className={classnames('icon', label.color, {tag: !editMode, trash: editMode})}/>
             {label.title}
           </a>

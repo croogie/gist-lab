@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import style from './gists_list.scss';
-import Item from './gists_list_item.jsx';
+import Item from '../containers/gists_list_item';
 
 import classnames from 'classnames';
 

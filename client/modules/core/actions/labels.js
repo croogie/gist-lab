@@ -1,15 +1,18 @@
 export default {
-  toggleLabelEditMode({LocalState, Msg}) {
+  toggleLabelEditMode({LocalState}) {
     LocalState.set('LABEL_EDIT_MODE', !LocalState.get('LABEL_EDIT_MODE'));
-    Msg.alert(`Edit mode has been switched ${LocalState.get('LABEL_EDIT_MODE') ? 'on' : 'off'}`);
   },
 
-  toggleLabelFilter({LocalState, Msg}, label) {
-    Msg.alert({
-      title: 'toggleLabelFilter',
-      message: 'Needs to be implemented',
-      type: 'warning'
-    });
+  toggleLabelFilter({LocalState, _}, label) {
+    let labelFilters = LocalState.get('GISTS_FILTER_LABELS');
+
+    if (labelFilters.indexOf(label) !== -1) {
+      LocalState.set('GISTS_FILTER_LABELS', _.without(labelFilters, label));
+    } else {
+      LocalState.set('GISTS_FILTER_LABELS', [label].concat(labelFilters));
+    }
+
+    console.log(LocalState.get('GISTS_FILTER_LABELS')); // XXX
   },
 
   addLabel({Meteor, Msg}) {
@@ -25,7 +28,8 @@ export default {
         } else {
           Msg.alert({
             title: 'There were some problems',
-            message: 'Label couldn\'t be added. Try again later'
+            message: 'Label couldn\'t be added. Try again later',
+            type: 'error'
           });
         }
       });
@@ -50,5 +54,22 @@ export default {
         }
       });
     }
+  },
+
+  updateGistLabels({Meteor, Msg}, gistId, labelIds) {
+    Meteor.call('labels.updateGist', gistId, labelIds, (err, result) => {
+      if (err) {
+        Msg.alert({
+          title: 'There were problem while saving labels',
+          message: 'Selected labels could\'t be saved.',
+          type: 'error'
+        });
+      } else {
+        Msg.alert({
+          title: 'Selected labels has been saved.',
+          type: 'success'
+        });
+      }
+    });
   }
 };

@@ -18,12 +18,15 @@ export const composer = ({context}, onData) => {
 
   const getGists = () => {
     props.items = Collections.Gists.findFiltered(
-      {userId: Meteor.userId()},
+      {
+        userId: Meteor.userId()
+      },
       {
         public: props.showPublic,
         private: props.showPrivate,
         starred: props.showStarred,
-        owned: LocalState.get('GISTS_FILTER_OWNED')
+        owned: LocalState.get('GISTS_FILTER_OWNED'),
+        labels: LocalState.get('GISTS_FILTER_LABELS')
       }
     ).fetch().map(gist => {
       gist.files = JSON.parse(gist.files);

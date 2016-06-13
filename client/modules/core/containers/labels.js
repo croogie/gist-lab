@@ -3,7 +3,7 @@ import {useDeps, composeAll, composeWithTracker, compose} from 'mantra-core';
 import Labels from '../components/labels.jsx';
 
 export const composer = ({context}, onData) => {
-  const {Meteor, Collections, LocalState} = context();
+  const {Meteor, Collections, LocalState, Tracker} = context();
   const userId = Meteor.userId();
 
   onData(null);
@@ -11,15 +11,18 @@ export const composer = ({context}, onData) => {
   function publishData() {
     onData(null, {
       labels: Collections.Labels.find({userId}).fetch(),
-      active: [],
+      active: LocalState.get('GISTS_FILTER_LABELS'),
       editMode: LocalState.get('LABEL_EDIT_MODE')
     });
   }
 
+  Tracker.autorun(publishData);
+
   if (Meteor.subscribe('labels').ready()) {
     publishData();
-
   }
+
+
 };
 
 export const depsMapper = (context, actions) => ({

@@ -1,4 +1,4 @@
-import {Labels} from '/lib/collections';
+import {Labels, Gists} from '/lib/collections';
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 
@@ -23,18 +23,31 @@ export default function () {
 
       return labelId;
     },
-
     'labels.remove'(_id) {
       check(_id, String);
       const userId = Meteor.userId();
 
-      const label = Labels.findOne({userId, _id});
+      // update all gists having such label
+      Gists.update(
+        {labels: _id},
+        {$pullAll: {labels: [_id]}},
+        {multi: true}
+      );
 
+      // remove label when every item has been updated
       Labels.remove({userId, _id});
 
-      // @todo: Update all user documents which had removed tag
-
       return true;
+    },
+    'labels.updateGist'(id, labels) {
+      console.log(id, labels); // XXX
+      check(id, String);
+      check(labels, Array);
+
+      let userId = Meteor.userId();
+      let gist = Gists.update({id, userId}, {$set: {labels}});
+
+      return gist;
     }
   });
 }
