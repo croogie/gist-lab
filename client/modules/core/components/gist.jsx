@@ -50,7 +50,8 @@ export default class Gist extends Component {
       onStarClick, onPublicityClick, onSaveClick, onEditClick, onDeleteClick
     } = this.props;
     const {starred, id, public: pub} = gist;
-    const editClassName = classnames('ui button primary right floated', {disabled: !editable});
+    const disabled = !editable;
+    const editClassName = classnames('ui button primary right floated', {disabled});
 
     return (
       <footer className={style.footer}>
@@ -64,16 +65,16 @@ export default class Gist extends Component {
           </button>
         )}
 
-        <button className="ui icon button" onClick={() => onStarClick(id)}>
-          <i className={classnames('star icon', {empty: !starred})}/>
+        <button className="ui button" onClick={() => onStarClick(id)}>
+          <i className={classnames('star icon', {empty: !starred, yellow: starred})}/> {starred ? 'Unstar' : 'Star it!'}
         </button>
 
-        <button className="ui button" onClick={() => onPublicityClick(id)}>
+        <button className={classnames('ui button', {disabled})} onClick={() => onPublicityClick(id)}>
           <i className={classnames('icon', {world: !pub, lock: pub})}/>
                 {pub ? 'Make private' : 'Make public'}
         </button>
 
-        <button className={classnames('ui icon button', {disabled: !editable})}
+        <button className={classnames('ui icon button', {disabled})}
                 onClick={() => onDeleteClick(id)}>
           <i className="trash icon"/>
         </button>

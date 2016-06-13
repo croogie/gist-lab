@@ -7,7 +7,6 @@ export const composer = ({context, file}, onData) => {
   let fileContent;
 
   function publishData() {
-    console.log('PUBLISH DATA CALLED', LocalState.get('EDIT_MODE')); // XXX
     onData(null, {
       editable: LocalState.get('EDIT_MODE'),
       content: fileContent,

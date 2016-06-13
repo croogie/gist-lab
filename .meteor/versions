@@ -29,6 +29,7 @@ ejson@1.0.11
 email@1.0.12
 es5-shim@4.5.10
 fastclick@1.0.11
+fortawesome:fontawesome@4.4.0_1
 fourseven:scss@3.4.3
 geojson-utils@1.0.8
 github@1.1.8
@@ -82,6 +83,7 @@ std:accounts-semantic@1.1.8
 std:accounts-ui@1.2.6
 templating@1.1.9
 templating-tools@1.0.4
+themeteorchef:bert@2.1.0
 tmeasday:check-npm-versions@0.3.1
 tracker@1.0.13
 ui@1.0.11
