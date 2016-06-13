@@ -58,6 +58,10 @@ To version management of app please use npm's package `mversion`.
 
 # Changelog
 
+### 0.4.0
+* Ability to review all files of shown GIST. 
+* Some UX/UI fixes. 
+
 ### 0.3.1
 * Fetching data on login and page load.
 
