@@ -1,5 +1,7 @@
 # Gist lab
 
+![Sample](https://raw.githubusercontent.com/croogie/gist-lab/develop/github/app.gif)
+
 Gist lab is an experimental Meteor application which uses Github API to manage your GISTs. Besides browsing and editing features it gives you ability to organize your Gist library with labels.
 
 # TL;DR
