@@ -72,11 +72,11 @@ export default {
     LocalState.set('EDIT_MODE', false);
   },
 
-  togglePublic({LocalState, Meteor, Msg}, gist) {
+  togglePublic({Msg}) {
     Msg.alert('Not implemented', 'warning');
   },
 
-  deleteGist({LocalState, Meteor, Msg}, gist) {
+  deleteGist({Msg}) {
     Msg.alert('Not implemented', 'warning');
   }
 

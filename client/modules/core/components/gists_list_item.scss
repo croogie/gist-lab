@@ -8,6 +8,7 @@
   border-bottom: 1px solid $color-border;
   padding: $unit .5*$unit;
   width: 300px;
+  position: relative;
 
   &:last-child {
     border-bottom: 0;

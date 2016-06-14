@@ -16,7 +16,7 @@ export default {
   addLabel({Meteor, Msg}) {
     let label = prompt('Please enter new label title', 'New label');
     if (label !== null) {
-      Meteor.call('labels.add', label, (err, result) => {
+      Meteor.call('labels.add', label, (err) => {
         if (!err) {
           Msg.alert({
             title: 'Label has been added',
@@ -36,7 +36,7 @@ export default {
 
   removeLabel({Meteor, Msg}, label) {
     if (confirm(`Are you sure you want to remove '${label.title}' label?`)) {
-      Meteor.call('labels.remove', label._id, (err, result) => {
+      Meteor.call('labels.remove', label._id, (err) => {
         if (err) {
           Msg.alert({
             title: 'Problems with removing label',
@@ -55,7 +55,7 @@ export default {
   },
 
   updateGistLabels({Meteor, Msg}, gistId, labelIds) {
-    Meteor.call('labels.updateGist', gistId, labelIds, (err, result) => {
+    Meteor.call('labels.updateGist', gistId, labelIds, (err) => {
       if (err) {
         Msg.alert({
           title: 'There were problem while saving labels',

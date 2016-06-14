@@ -1,4 +1,4 @@
-import {useDeps, composeAll, composeWithTracker, compose} from 'mantra-core';
+import {useDeps, composeAll, composeWithTracker} from 'mantra-core';
 
 import {authComposer} from 'meteor-auth';
 import AuthButton from '../components/auth_button.jsx';

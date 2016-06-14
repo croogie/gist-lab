@@ -1,4 +1,4 @@
-import {resetState} from '/client/modules/core/libs/common';
+import {resetState} from '../libs/common';
 import github from './github';
 
 export default {

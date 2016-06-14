@@ -17,7 +17,7 @@ To run project you have to:
 
 ## Technology stack
 
-Project is build on top of [Meteor framework](https://www.meteor.com/) (v1.3.2.4). Adopted dir structure follows [Mantra specification](https://kadirahq.github.io/mantra/) which standardizes many aspects of maintaining complex Meteor applications. 
+Project is build on top of [Meteor framework](https://www.meteor.com/) (v1.3.3). Adopted dir structure follows [Mantra specification](https://kadirahq.github.io/mantra/) which standardizes many aspects of maintaining complex Meteor applications. 
 
 ### Front-end stack
 
@@ -60,6 +60,10 @@ WOOPS! Something is not working as expected. In progress...
 To version management of app please use npm's package `mversion`.
 
 # Changelog
+
+### 0.6.0
+* Update of Meteor to `1.3.3`
+* Better loading layout for list item.
 
 ### 0.5.1
 * Unselecting active element while reaching home.

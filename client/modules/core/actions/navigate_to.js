@@ -1,4 +1,4 @@
-import {setFilters} from '/client/modules/core/libs/common';
+import {setFilters} from '../libs/common';
 
 
 export default {

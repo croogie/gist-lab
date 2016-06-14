@@ -7,7 +7,7 @@ import GistsList from './containers/gists_list';
 import Home from './components/home.jsx';
 import Gist from './containers/gist';
 
-import {version} from '/package.json';
+import {version} from '../../../package.json';
 
 export default function (injectDeps, {FlowRouter, LocalState}) {
   const MainLayoutCtx = injectDeps(MainLayout);

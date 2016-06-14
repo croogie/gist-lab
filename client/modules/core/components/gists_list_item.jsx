@@ -39,6 +39,9 @@ export default class GistsListItem extends Component {
 
     return (
       <div className={selected ? style.selected : style.container} onClick={onClick}>
+        {this.props.loading ? (<div className="ui active inverted dimmer">
+          <div className="ui indeterminate loader"/>
+        </div>) : null}
         <div className={style.avatar}>
           <img src={avatar_url} className="ui mini rounded image"/>
         </div>
