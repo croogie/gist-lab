@@ -1,8 +1,6 @@
 import React from 'react';
 import Menu from '../containers/menu';
 import style from './main_layout.scss';
-import {Accounts} from 'meteor/std:accounts-ui';
-import {EnsureLoggedIn} from 'meteor-auth';
 
 const noContent = () => null;
 
