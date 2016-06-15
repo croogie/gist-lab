@@ -1,5 +1,4 @@
 import {resetState} from '../libs/common';
-import github from './github';
 
 export default {
   logout({Meteor, FlowRouter, Msg}) {

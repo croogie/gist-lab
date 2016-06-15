@@ -63,8 +63,8 @@ export default {
   },
 
   editGist({LocalState, Msg}) {
-    Msg.alert('You can edit your GIST', 'success', 'growl-top-right');
-    LocalState.set('EDIT_MODE', true);
+    Msg.alert('Not implemented', 'warning');
+    return;
   },
 
   saveGist({LocalState, Msg}) {
