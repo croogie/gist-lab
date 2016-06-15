@@ -32,6 +32,18 @@ Libraries which are widely used within app:
 
 If you're familiar with Meteor you'll know that there sits MongoDB and all NodeJS stuff.
 
+## Features
+
+- [x] 3 column layout.
+- [x] Authentication with GitHub.
+- [x] View user's gists and gists he starred.
+- [x] User can create and remove labels.
+- [x] User can add/remove labels from/to gists.
+- [x] User can browse gists by label.
+- [ ] User can create and edit gists.
+- [ ] User can delete gists.
+- [ ] User can switch between public and private gist status.
+
 ## Modules
 
 ### Core
@@ -50,16 +62,22 @@ During development you should follow [GitFlow](http://danielkummer.github.io/git
 
 To check if code written by you applies adopted coding standards please use ESLint package. 
 
+`npm run lint`
+
 ## Testing
 
-WOOPS! Something is not working as expected. In progress...
-~~To run tests simply execute `npm test`~~
+To run tests simply execute `npm test`. So far there are only few tests for component [gists_list_item](https://github.com/croogie/gist-lab/blob/develop/client/modules/core/components/tests/gists_list_item.js). More comming soon...
 
 ## Versioning
 
 To version management of app please use npm's package `mversion`.
 
 # Changelog
+
+### 0.7.0
+* Tests are able to run!
+* Had to downgrade to Meteor `1.3.2.4`
+* Documentation
 
 ### 0.6.0
 * Update of Meteor to `1.3.3`

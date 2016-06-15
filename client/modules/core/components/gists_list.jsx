@@ -18,8 +18,8 @@ export default class GistsList extends Component {
 
     return (
       <div className={style.listContainer}>
-           {items.map((item) => (
-             <Item key={item.id}
+           {items.map((item, i) => (
+             <Item key={i}
                    gist={item}
                    onClick={() => open(item.id)}
                    selected={item.id === selectedId}/>

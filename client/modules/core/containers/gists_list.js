@@ -5,22 +5,19 @@ import GistsList from '../components/gists_list.jsx';
 export const composer = ({context}, onData) => {
   const {Meteor, LocalState, Collections, Tracker} = context();
 
-  let props = {
-    loading: true,
-    fetching: Boolean(LocalState.get('FETCHING_GISTS')),
-    showStarred: Boolean(LocalState.get('GISTS_FILTER_STARRED')),
-    showPrivate: Boolean(LocalState.get('GISTS_FILTER_PRIVATE')),
-    showPublic: Boolean(LocalState.get('GISTS_FILTER_PUBLIC')),
-    showOwned: Boolean(LocalState.get('GISTS_FILTER_OWNED')),
-    editing: Boolean(LocalState.get('EDIT_MODE')),
-    selectedId: LocalState.get('GIST')
-  };
+  const getGists = (ready = false) => {
+    let props = {
+      loading: !ready,
+      fetching: Boolean(LocalState.get('FETCHING_GISTS')),
+      showStarred: Boolean(LocalState.get('GISTS_FILTER_STARRED')),
+      showPrivate: Boolean(LocalState.get('GISTS_FILTER_PRIVATE')),
+      showPublic: Boolean(LocalState.get('GISTS_FILTER_PUBLIC')),
+      showOwned: Boolean(LocalState.get('GISTS_FILTER_OWNED')),
+      editing: Boolean(LocalState.get('EDIT_MODE')),
+      selectedId: LocalState.get('GIST')
+    };
 
-  const getGists = () => {
-    props.items = Collections.Gists.findFiltered(
-      {
-        userId: Meteor.userId()
-      },
+    props.items = Collections.Gists.findFiltered({userId: Meteor.userId()},
       {
         public: props.showPublic,
         private: props.showPrivate,
@@ -32,16 +29,15 @@ export const composer = ({context}, onData) => {
       gist.files = JSON.parse(gist.files);
       return gist;
     });
-    props.loading = false;
+
+    onData(null, props);
   };
 
   Tracker.autorun(getGists);
 
   if (Meteor.subscribe('gists').ready()) {
-    getGists();
+    getGists(true);
   }
-
-  onData(null, props);
 };
 
 export const depsMapper = (context, actions) => ({

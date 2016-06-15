@@ -11,11 +11,13 @@ export default class AuthButton extends Component {
       </div>
     );
   }
+
   logging() {
     return (
       <button className="ui primary loading fluid medium button">Loading</button>
     );
   }
+
   loggedIn() {
     return (
       <button className="ui primary fluid medium icon button" onClick={this.props.logout} tabIndex="0">
@@ -31,8 +33,8 @@ export default class AuthButton extends Component {
       return this.loggedIn();
     } else if (loggingIn) {
       return this.logging();
-    } else {
-      return this.loggedOut();
     }
+
+    return this.loggedOut();
   }
 };

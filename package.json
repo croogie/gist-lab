@@ -4,7 +4,7 @@
   "description": "Meteor Gist management experiment",
   "scripts": {
     "dev": "meteor --settings development.json",
-    "test": "mocha .scripts/mocha_boot.js client/**/tests/**/*.js --compilers js:babel-core/register",
+    "test": "mocha --require .scripts/mocha_boot.js -u mocha-given --harmony-proxies --compilers js:babel-core/register client/**/tests/**/*.js",
     "lint": "./node_modules/.bin/eslint ."
   },
   "repository": {
@@ -40,12 +40,14 @@
     "babel-preset-stage-2": "6.x.x",
     "babel-root-slash-import": "1.x.x",
     "chai": "3.x.x",
+    "chai-enzyme": "^0.5.0",
     "enzyme": "^2.2.0",
     "eslint": "^2.7.0",
     "eslint-plugin-meteor": "^3.6.0",
     "eslint-plugin-react": "^4.3.0",
     "jsdom": "^8.0.4",
     "mocha": "2.x.x",
+    "mock-css-modules": "^1.0.0",
     "postcss-safe-parser": "^1.0.7",
     "react-addons-test-utils": "^15.0.0",
     "sinon": "1.17.x"
@@ -61,12 +63,8 @@
     "parser": "postcss-safe-parser"
   },
   "cssModules": {
-    "extensions": [
-      "scss"
-    ],
-    "globalVariables": [
-      "client/configs/variables.scss"
-    ],
+    "extensions": ["scss"],
+    "globalVariables": [],
     "outputJsFilePath": {
       ".*node_modules/.*": "{dirname}/{basename}"
     }

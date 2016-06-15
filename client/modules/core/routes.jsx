@@ -12,23 +12,23 @@ import {version} from '../../../package.json';
 export default function (injectDeps, {FlowRouter, LocalState}) {
   const MainLayoutCtx = injectDeps(MainLayout);
 
-  FlowRouter.route('/', {
-    name: 'home',
-    action() {
-      LocalState.set('GIST', null);
-      mount(MainLayoutCtx, {
-        content: () => (<Home version={version} />),
-        list: () => (<GistsList />)
-      });
-    }
-  });
-
   FlowRouter.route('/gist/:id', {
     name: 'gist',
     action(params) {
       LocalState.set('GIST', String(params.id));
       mount(MainLayoutCtx, {
         content: () => (<Gist id={params.id}/>),
+        list: () => (<GistsList />)
+      });
+    }
+  });
+
+  FlowRouter.route('/*', {
+    name: 'home',
+    action() {
+      LocalState.set('GIST', null);
+      mount(MainLayoutCtx, {
+        content: () => (<Home version={version}/>),
         list: () => (<GistsList />)
       });
     }
