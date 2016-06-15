@@ -1,6 +1,6 @@
 {
   "name": "gist-lab",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Meteor Gist management experiment",
   "scripts": {
     "dev": "meteor --settings development.json",
@@ -63,7 +63,9 @@
     "parser": "postcss-safe-parser"
   },
   "cssModules": {
-    "extensions": ["scss"],
+    "extensions": [
+      "scss"
+    ],
     "globalVariables": [],
     "outputJsFilePath": {
       ".*node_modules/.*": "{dirname}/{basename}"
