@@ -4,7 +4,7 @@
   "description": "Meteor Gist management experiment",
   "scripts": {
     "dev": "meteor --settings development.json",
-    "test": "mocha --require .scripts/mocha_boot.js --harmony-proxies --compilers js:babel-core/register client/**/tests/**/*.js",
+    "test": "mocha --require .scripts/mocha_boot.js -u mocha-given --harmony-proxies --compilers js:babel-core/register client/**/tests/**/*.js",
     "lint": "./node_modules/.bin/eslint ."
   },
   "repository": {
@@ -40,6 +40,7 @@
     "babel-preset-stage-2": "6.x.x",
     "babel-root-slash-import": "1.x.x",
     "chai": "3.x.x",
+    "chai-enzyme": "^0.5.0",
     "enzyme": "^2.2.0",
     "eslint": "^2.7.0",
     "eslint-plugin-meteor": "^3.6.0",

@@ -10,7 +10,7 @@ export const composer = ({context}, onData) => {
 
   if (Meteor.subscribe('labels').ready()) {
     const userId = Meteor.userId();
-    const labels = Collections.Labels
+    const labelDefs = Collections.Labels
       .find({userId})
       .fetch()
       .reduce((labels, label) => {
@@ -18,7 +18,7 @@ export const composer = ({context}, onData) => {
         return labels;
       }, {});
 
-    onData(null, {labels});
+    onData(null, {labelDefs});
   }
 };
 
